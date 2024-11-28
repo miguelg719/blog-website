@@ -6,7 +6,8 @@ import markdownToHtml from "@/lib/markdownToHtml";
 
 export default async function Index() {
   // Get your single post - replace 'your-post-slug' with your actual post slug
-  const post = getPostBySlug('llama-homeassistant');
+  // const post = getPostBySlug('llama-homeassistant');
+  const post = getPostBySlug('browser-use');
   const content = await markdownToHtml(post.content || "");
 
   return (
@@ -15,10 +16,7 @@ export default async function Index() {
         <article className="mb-32">
           <PostHeader
             title={post.title}
-            coverImage={{
-              src: "/assets/videos/smart_home_demo.mp4",
-              isVideo: true
-            }}
+            coverImage={post.coverImage}
             date={post.date}
             author={post.author}
           />

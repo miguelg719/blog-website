@@ -23,7 +23,7 @@ export function PostHeader({ title, coverImage, date, author }: Props) {
         {coverImage.isVideo ? (
           <video 
             controls
-            className="w-5/6 md:w-4/5 lg:w-3/5 rounded-lg"
+            className="w-6/7 md:w-5/6 lg:w-4/6 rounded-lg"
           >
             <source src={coverImage.src} type="video/mp4" />
           </video>
