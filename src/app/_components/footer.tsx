@@ -1,26 +1,25 @@
 import Container from "@/app/_components/container";
-import { EXAMPLE_PATH } from "@/lib/constants";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function Footer() {
   return (
     <footer className="bg-neutral-50 border-t border-neutral-200 dark:bg-slate-800">
       <Container>
-        <div className="py-28 flex flex-col lg:flex-row items-center">
-          <h3 className="text-4xl lg:text-[2.5rem] font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-            Statically Generated with Next.js.
+        <div className="py-6 flex flex-col lg:flex-row items-center justify-between">
+          <h3 className="text-xs font-small text-center lg:text-left lg:mb-0 order-2 lg:order-1">
+            Built with Next.js
           </h3>
-          <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
+          <div className="flex flex-row gap-2 mb-4 lg:mb-0 items-center order-1 lg:order-2">
+            <FontAwesomeIcon
+              icon={faGithub}
+              className="w-5 h-5 lg:w-7 lg:h-7 text-neutral-700 dark:text-neutral-200"
+            />
             <a
-              href="https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates"
-              className="mx-3 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0"
+              href={`https://github.com/miguelg719`}
+              className="text-sm hover:underline"
             >
-              Read Documentation
-            </a>
-            <a
-              href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
-              className="mx-3 font-bold hover:underline"
-            >
-              View on GitHub
+              GitHub
             </a>
           </div>
         </div>

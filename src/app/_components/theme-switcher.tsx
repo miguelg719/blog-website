@@ -2,6 +2,8 @@
 
 import styles from "./switch.module.css";
 import { memo, useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon, faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
 
 declare global {
   var updateDOM: () => void;
@@ -57,20 +59,27 @@ let updateDOM: () => void;
  * Switch button to quickly toggle user preference.
  */
 const Switch = () => {
-  const [mode, setMode] = useState<ColorSchemePreference>(
-    () =>
-      ((typeof localStorage !== "undefined" &&
-        localStorage.getItem(STORAGE_KEY)) ??
-        "system") as ColorSchemePreference,
-  );
+  const [mode, setMode] = useState<ColorSchemePreference>('system');
 
   useEffect(() => {
-    // store global functions to local variables to avoid any interference
+    // Immediately update the mode from localStorage
+    const storedMode = localStorage.getItem(STORAGE_KEY) as ColorSchemePreference;
+    if (storedMode) {
+      setMode(storedMode);
+    }
+
+    // store global functions to local variables
     updateDOM = window.updateDOM;
-    /** Sync the tabs */
-    addEventListener("storage", (e: StorageEvent): void => {
-      e.key === STORAGE_KEY && setMode(e.newValue as ColorSchemePreference);
-    });
+
+    // Sync across tabs
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY) {
+        setMode(e.newValue as ColorSchemePreference);
+      }
+    };
+    
+    addEventListener("storage", handleStorage);
+    return () => removeEventListener("storage", handleStorage);
   }, []);
 
   useEffect(() => {
@@ -83,12 +92,26 @@ const Switch = () => {
     const index = modes.indexOf(mode);
     setMode(modes[(index + 1) % modes.length]);
   };
+
+  const getIcon = () => {
+    switch(mode) {
+      case 'light':
+        return <FontAwesomeIcon icon={faSun} className="w-5 h-5" />;
+      case 'dark':
+        return <FontAwesomeIcon icon={faMoon} className="w-5 h-5" />;
+      default:
+        return <FontAwesomeIcon icon={faCircleHalfStroke} className="w-5 h-5" />;
+    }
+  };
+
   return (
     <button
       suppressHydrationWarning
       className={styles.switch}
       onClick={handleModeSwitch}
-    />
+    >
+      {getIcon()}
+    </button>
   );
 };
 

@@ -1,29 +1,29 @@
 import Container from "@/app/_components/container";
-import { HeroPost } from "@/app/_components/hero-post";
-import { Intro } from "@/app/_components/intro";
-import { MoreStories } from "@/app/_components/more-stories";
-import { getAllPosts } from "@/lib/api";
+import { getPostBySlug } from "@/lib/api";
+import { PostBody } from "@/app/_components/post-body";
+import { PostHeader } from "@/app/_components/post-header";
+import markdownToHtml from "@/lib/markdownToHtml";
 
-export default function Index() {
-  const allPosts = getAllPosts();
-
-  const heroPost = allPosts[0];
-
-  const morePosts = allPosts.slice(1);
+export default async function Index() {
+  // Get your single post - replace 'your-post-slug' with your actual post slug
+  const post = getPostBySlug('llama-homeassistant');
+  const content = await markdownToHtml(post.content || "");
 
   return (
     <main>
       <Container>
-        <Intro />
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        <article className="mb-32">
+          <PostHeader
+            title={post.title}
+            coverImage={{
+              src: "/assets/videos/smart_home_demo.mp4",
+              isVideo: true
+            }}
+            date={post.date}
+            author={post.author}
+          />
+          <PostBody content={content} />
+        </article>
       </Container>
     </main>
   );

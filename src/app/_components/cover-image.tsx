@@ -6,10 +6,24 @@ type Props = {
   title: string;
   src: string;
   slug?: string;
+  isVideo?: boolean;
 };
 
-const CoverImage = ({ title, src, slug }: Props) => {
-  const image = (
+const CoverImage = ({ title, src, slug, isVideo = false }: Props) => {
+  const media = isVideo ? (
+    <video
+      autoPlay
+      loop
+      muted
+      playsInline
+      className={cn("shadow-sm w-full object-cover", {
+        "hover:shadow-lg transition-shadow duration-200": slug,
+      })}
+    >
+      <source src={src} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  ) : (
     <Image
       src={src}
       alt={`Cover Image for ${title}`}
@@ -20,14 +34,15 @@ const CoverImage = ({ title, src, slug }: Props) => {
       height={630}
     />
   );
+
   return (
     <div className="sm:mx-0">
       {slug ? (
         <Link href={`/posts/${slug}`} aria-label={title}>
-          {image}
+          {media}
         </Link>
       ) : (
-        image
+        media
       )}
     </div>
   );
