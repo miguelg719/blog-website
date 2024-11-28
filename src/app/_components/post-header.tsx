@@ -17,7 +17,7 @@ type Props = {
 
 export function PostHeader({ title, coverImage, date, author }: Props) {
   return (
-    <section className="mt-20 mb-20 md:mb-12">
+    <section className="mt-20 mb-6 md:mb-6">
       <PostTitle>{title}</PostTitle>
       <div className="mb-8 md:mb-16 sm:mx-0 flex justify-center">
         {coverImage.isVideo ? (
@@ -39,7 +39,7 @@ export function PostHeader({ title, coverImage, date, author }: Props) {
         <div className="block mb-6">
           <Avatar name={author.name} />
         </div>
-        <div className="mb-6 text-lg">
+        <div className="mb-4 text-lg">
           <DateFormatter dateString={date} />
         </div>
       </div>
