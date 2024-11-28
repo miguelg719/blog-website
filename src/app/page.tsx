@@ -6,8 +6,7 @@ import markdownToHtml from "@/lib/markdownToHtml";
 
 export default async function Index() {
   // Get your single post - replace 'your-post-slug' with your actual post slug
-  const post = getPostBySlug('llama-homeassistant');
-  // const post = getPostBySlug('browser-use');
+  const post = getPostBySlug('hello-world');
   const content = await markdownToHtml(post.content || "");
 
   return (

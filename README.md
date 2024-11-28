@@ -1,63 +1,112 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+# Blog Website
 
-This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+A modern blog website built with Next.js, TypeScript, and Markdown, featuring a clean design and responsive layout.
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates) feature using Markdown files as the data source.
+## Technologies Used
 
-The blog posts are stored in `/_posts` as Markdown files with front matter support. Adding a new Markdown file in there will create a new blog post.
+- [Next.js](https://nextjs.org/) - React framework for production
+- TypeScript - For type-safe code
+- Markdown - For content management
+- [Tailwind CSS](https://tailwindcss.com) - For styling
+- [`remark`](https://github.com/remarkjs/remark) - For Markdown processing
+- [`gray-matter`](https://github.com/jonschlinkert/gray-matter) - For parsing Markdown metadata
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the Markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
+## Features
 
-## Demo
+- Static Generation with Next.js
+- Markdown-based blog posts
+- Responsive design
+- SEO optimized
+- Type-safe development with TypeScript
+- Clean and minimal UI
 
-[https://next-blog-starter.vercel.app/](https://next-blog-starter.vercel.app/)
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/blog-starter)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/blog-starter&project-name=blog-starter&repository-name=blog-starter)
-
-### Related examples
-
-- [WordPress](/examples/cms-wordpress)
-- [DatoCMS](/examples/cms-datocms)
-- [Sanity](/examples/cms-sanity)
-- [TakeShape](/examples/cms-takeshape)
-- [Prismic](/examples/cms-prismic)
-- [Contentful](/examples/cms-contentful)
-- [Strapi](/examples/cms-strapi)
-- [Agility CMS](/examples/cms-agilitycms)
-- [Cosmic](/examples/cms-cosmic)
-- [ButterCMS](/examples/cms-buttercms)
-- [Storyblok](/examples/cms-storyblok)
-- [GraphCMS](/examples/cms-graphcms)
-- [Kontent](/examples/cms-kontent)
-- [Umbraco Heartcore](/examples/cms-umbraco-heartcore)
-- [Builder.io](/examples/cms-builder-io)
-- [TinaCMS](/examples/cms-tina/)
-- [Enterspeed](/examples/cms-enterspeed)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+## Local Development
 
 ```bash
-npx create-next-app --example blog-starter blog-starter-app
+# Clone the repository
+git clone https://github.com/miguelg719/blog-website.git
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
+Your blog will be running at [http://localhost:3000](http://localhost:3000)
+
+## Blog Posts
+
+Blog posts are stored in the `/_posts` directory as Markdown files. Each post includes front matter for metadata and Markdown content for the body.
+
+### Post Format
+```markdown
+---
+title: 'Post Title'
+excerpt: 'Post excerpt'
+coverImage: '/assets/blog/preview/cover.jpg'
+date: '2024-03-16T05:35:07.322Z'
+author:
+  name: Your Name
+  picture: '/assets/blog/authors/profile.jpg'
+ogImage:
+  url: '/assets/blog/preview/cover.jpg'
+---
+
+Post content goes here...
+```
+
+## Deployment
+
+### Vercel Deployment
+This site can be deployed on [Vercel](https://vercel.com) with zero configuration:
+1. Push your code to GitHub
+2. Import your repository to Vercel
+3. Vercel will detect Next.js and deploy automatically
+
+### GitHub Pages Deployment
+To deploy on GitHub Pages:
+
+1. First, update `next.config.js`:
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',  // Enables static exports
+  basePath: '/blog-website', // Replace with your repository name
+  images: {
+    unoptimized: true,
+  },
+}
+
+module.exports = nextConfig
+```
+
+2. Add the build and deploy script to `package.json`:
+```json
+{
+  "scripts": {
+    "deploy": "next build && touch out/.nojekyll && gh-pages -d out"
+  }
+}
+```
+
+3. Install the gh-pages package:
 ```bash
-yarn create next-app --example blog-starter blog-starter-app
+npm install --save-dev gh-pages
 ```
 
+4. Deploy to GitHub Pages:
 ```bash
-pnpm create next-app --example blog-starter blog-starter-app
+npm run deploy
 ```
 
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+5. Enable GitHub Pages in your repository settings:
+   - Go to Settings > Pages
+   - Select 'gh-pages' branch as the source
+   - Save the changes
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Your blog will be available at `https://yourusername.github.io/blog-website`
 
-# Notes
+## License
 
-`blog-starter` uses [Tailwind CSS](https://tailwindcss.com) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3).
+[MIT License](LICENSE)
