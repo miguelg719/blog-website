@@ -1,8 +1,6 @@
 import Avatar from "./avatar";
-import CoverImage from "./cover-image";
 import DateFormatter from "./date-formatter";
 import { PostTitle } from "@/app/_components/post-title";
-import { type Author } from "@/interfaces/author";
 import Image from "next/image";
 
 type Props = {
@@ -10,12 +8,19 @@ type Props = {
   coverImage: {
     src: string;
     isVideo?: boolean;
+    poster?: string;
   };
   date: string;
   author: any;
 };
 
 export function PostHeader({ title, coverImage, date, author }: Props) {
+  const basePath = process.env.NODE_ENV === 'production' ? '/llama-homeassistant-blog' : '';
+  const videoSrc = coverImage.src.startsWith('/') ? `${basePath}${coverImage.src}` : coverImage.src;
+  const posterSrc = coverImage.poster && coverImage.poster.startsWith('/') 
+    ? `${basePath}${coverImage.poster}` 
+    : coverImage.poster;
+
   return (
     <section className="mt-20 mb-6 md:mb-6">
       <PostTitle>{title}</PostTitle>
@@ -23,13 +28,15 @@ export function PostHeader({ title, coverImage, date, author }: Props) {
         {coverImage.isVideo ? (
           <video 
             controls
-            className="w-6/7 md:w-5/6 lg:w-4/6 rounded-lg"
+            poster={posterSrc || `${basePath}/assets/images/video-thumbnail.png`}
+            className="w-6/7 md:w-5/6 lg:w-4/6 rounded-lg bg-gray-100 dark:bg-gray-800"
+            preload="metadata"
           >
-            <source src={coverImage.src} type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
           </video>
         ) : (
           <Image
-            src={coverImage.src}
+            src={videoSrc}
             alt={title}
             // ... other Image props
           />
