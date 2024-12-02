@@ -1,6 +1,6 @@
 # Blog Website
 
-A modern blog website built with Next.js, TypeScript, and Markdown, featuring a clean design and responsive layout.
+A modern blog website template built with Next.js, TypeScript, and Markdown, featuring a clean design and responsive layout.
 
 ![Blog Website sample](./public/assets/blog_website.png)
 
